@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#312E81" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <g filter="url(#shadow)">
+    <!-- Paper -->
+    <rect x="156" y="100" width="200" height="150" rx="12" fill="#FFFFFF" />
+    <!-- Lines on Paper -->
+    <rect x="186" y="130" width="140" height="16" rx="8" fill="#E2E8F0" />
+    <rect x="186" y="166" width="140" height="16" rx="8" fill="#E2E8F0" />
+    <rect x="186" y="202" width="100" height="16" rx="8" fill="#E2E8F0" />
+    <!-- Printer Body -->
+    <path d="M100 240 h 312 a 32 32 0 0 1 32 32 v 96 a 32 32 0 0 1 -32 32 h -312 a 32 32 0 0 1 -32 -32 v -96 a 32 32 0 0 1 32 -32 z" fill="#F8FAFC" />
+    <!-- Printer Output Slot -->
+    <rect x="136" y="380" width="240" height="40" rx="4" fill="#FFFFFF" />
+    <rect x="156" y="360" width="200" height="20" fill="#94A3B8" />
+    <!-- Printer Indicator Light -->
+    <circle cx="372" cy="288" r="12" fill="#10B981" />
+    <circle cx="332" cy="288" r="12" fill="#CBD5E1" />
+  </g>
+</svg>
