@@ -1,5 +1,5 @@
 import { app, Menu, Tray, nativeImage } from "electron";
-import { startCloudConnection, stopCloudConnection } from "./cloud/connection";
+import { startCloudConnection, stopCloudConnection, initWsLog } from "./cloud/connection";
 import { initSettings } from "./config/settings";
 import { registerIpc } from "./ipc";
 import { initJobLog } from "./print/jobLog";
@@ -33,6 +33,7 @@ if (!gotLock) {
 
   app.whenReady().then(() => {
     initSettings(app);
+    initWsLog(app.getPath("userData"));
     initJobLog(app.getPath("userData"));
     registerIpc();
     createMainWindow();

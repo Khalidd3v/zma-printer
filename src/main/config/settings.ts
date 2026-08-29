@@ -13,6 +13,14 @@ function mergeWithDefaults(raw: Partial<Settings>): Settings {
   return {
     ...generated,
     ...raw,
+    columns: {
+      thermal: Array.isArray(raw.columns?.thermal) ? raw.columns.thermal : [...generated.columns.thermal],
+      a4: Array.isArray(raw.columns?.a4) ? raw.columns.a4 : [...generated.columns.a4],
+    },
+    thermal_note: typeof raw.thermal_note === "string" && raw.thermal_note.length > 0 ? raw.thermal_note : generated.thermal_note,
+    thermal_footer: typeof raw.thermal_footer === "string" && raw.thermal_footer.length > 0 ? raw.thermal_footer : generated.thermal_footer,
+    a4_note: typeof raw.a4_note === "string" && raw.a4_note.length > 0 ? raw.a4_note : generated.a4_note,
+    a4_footer: typeof raw.a4_footer === "string" && raw.a4_footer.length > 0 ? raw.a4_footer : generated.a4_footer,
     cloud: {
       ...generated.cloud,
       ...(raw.cloud || {}),

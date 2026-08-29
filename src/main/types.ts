@@ -14,6 +14,9 @@ export interface StoreInfo {
 export interface InvoiceItem {
   product_name?: string;
   product_id?: string | number | null;
+  product_size?: string;
+  size?: string;
+  size_name?: string;
   quantity: number | string;
   sale_price: number | string;
   unit_discount?: number | string;
@@ -30,11 +33,15 @@ export interface Invoice {
   invoice_number: string;
   payment_type?: string;
   customer_name?: string | null;
+  customer_phone?: string | null;
+  customer_address?: string | null;
   cashier_name?: string | null;
   status?: string;
   sale_date?: string | null;
   items?: InvoiceItem[];
   custom_invoice?: { items?: CustomInvoiceItem[] } | null;
+  subtotal?: number | string;
+  tax_amount?: number | string;
   shipping_amount?: number | string;
   manual_discount?: number | string;
   amount_paid?: number | string;

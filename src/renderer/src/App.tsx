@@ -6,12 +6,15 @@ import PrintersPanel from "./components/PrintersPanel";
 import CloudPanel from "./components/CloudPanel";
 import TestPrintButtons from "./components/TestPrintButtons";
 import JobLog from "./components/JobLog";
+import DesignScreen from "./components/DesignScreen";
+import DeveloperScreen from "./components/DeveloperScreen";
 
 export default function App() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [printers, setPrinters] = useState<PrinterInfo[]>([]);
   const [jobs, setJobs] = useState<JobLogEntry[]>([]);
   const [flash, setFlash] = useState("");
+  const [screen, setScreen] = useState<"home" | "design" | "developer">("home");
 
   const notify = (message: string) => {
     setFlash(message);
@@ -104,16 +107,34 @@ export default function App() {
           <h1>Zma Printer Agent</h1>
           <p className="subtitle">WebSocket printing bridge</p>
         </div>
+        {screen === "home" ? (
+          <div className="titlebar-actions">
+            <button className="btn small" onClick={() => setScreen("design")}>Invoice Design</button>
+            <button className="btn small danger" onClick={() => setScreen("developer")}>Developer</button>
+          </div>
+        ) : (
+          <button className="btn small" onClick={() => setScreen("home")}>← Dashboard</button>
+        )}
       </header>
 
       {flash && <div className="flash">{flash}</div>}
 
-      <main className="grid">
-        <CloudPanel settings={settings} onUpdate={update} onDisconnect={disconnectCloud} />
-        <PrintersPanel settings={settings} printers={printers} onUpdate={update} onRefresh={refreshPrinters} />
-        <TestPrintButtons onTest={testPrint} />
-        <JobLog jobs={jobs} onClear={clearJobs} />
-      </main>
+      {screen === "design" ? (
+        <main className="design-wrap">
+          <DesignScreen settings={settings} onUpdate={update} onBack={() => setScreen("home")} />
+        </main>
+      ) : screen === "developer" ? (
+        <main className="dev-wrap">
+          <DeveloperScreen settings={settings} onBack={() => setScreen("home")} />
+        </main>
+      ) : (
+        <main className="grid">
+          <CloudPanel settings={settings} onUpdate={update} onDisconnect={disconnectCloud} />
+          <PrintersPanel settings={settings} printers={printers} onUpdate={update} onRefresh={refreshPrinters} />
+          <TestPrintButtons onTest={testPrint} />
+          <JobLog jobs={jobs} onClear={clearJobs} />
+        </main>
+      )}
     </div>
   );
 }
